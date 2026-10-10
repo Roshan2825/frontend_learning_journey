@@ -1,0 +1,413 @@
+<!--
+2. HTML Forms
+
+An HTML form collects information from users and provides a way to submit it.
+
+Real-world examples:
+
+Registration forms
+
+Login pages
+
+Contact forms
+
+Job application forms
+
+Search boxes
+
+Feedback forms
+
+Checkout pages
+
+2.1 Basic Form Structure
+<form action="/register" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+
+    <button type="submit">Register</button>
+</form>
+Important attributes
+
+Attribute
+
+	
+
+Purpose
+
+
+
+
+action
+
+	
+
+URL where the form data is submitted
+
+
+
+
+method
+
+	
+
+HTTP method used to submit the data
+
+
+
+
+name
+
+	
+
+Key used to identify a submitted field
+
+
+
+
+id
+
+	
+
+Identifies an element in the document
+
+
+
+
+for
+
+	
+
+Connects a label to its input
+
+
+
+
+type
+
+	
+
+Specifies the kind of input
+
+
+
+
+required
+
+	
+
+Makes a field mandatory
+
+Important: /register is an example endpoint. This form will not register a user unless a backend or suitable server endpoint handles the request.
+
+2.2 Text Input
+
+Use type="text" to collect short text such as a name or username.
+
+<label for="fullname">Full Name:</label>
+<input
+    type="text"
+    id="fullname"
+    name="fullname"
+    placeholder="Enter your full name"
+    required
+>
+
+placeholder displays a hint inside the field.
+
+required prevents normal form submission when the field is empty.
+
+name determines the key used when the field is submitted.
+
+Use a <label> for every input so users can identify its purpose and assistive technologies can associate the label with the field.
+
+2.3 Email Input
+
+Use type="email" to collect an email address.
+
+<label for="email">Email:</label>
+<input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="you@example.com"
+    required
+>
+
+The browser checks whether the value has a valid email-like format. This does not prove the email address exists.
+
+2.4 Password Input
+
+Use type="password" to mask the characters entered.
+
+<label for="password">Password:</label>
+<input
+    type="password"
+    id="password"
+    name="password"
+    minlength="8"
+    required
+>
+
+minlength="8" sets a minimum length of eight characters.
+
+Security note: Masking characters does not encrypt or securely store a password. Authentication and secure password storage must be implemented by the backend.
+
+2.5 Number Input
+
+Use type="number" for numeric values such as quantity.
+
+<label for="quantity">Quantity:</label>
+<input
+    type="number"
+    id="quantity"
+    name="quantity"
+    min="1"
+    max="10"
+    value="1"
+>
+
+min — minimum permitted value.
+
+max — maximum permitted value.
+
+value — initial value.
+
+For phone numbers, use type="tel" rather than type="number", because phone numbers are identifiers, not quantities.
+
+2.6 Radio Buttons
+
+Radio buttons allow users to select one option from a group.
+
+<p>Employment Type:</p>
+
+<label>
+    <input type="radio" name="employment" value="full-time" required>
+    Full-time
+</label>
+
+<label>
+    <input type="radio" name="employment" value="part-time">
+    Part-time
+</label>
+
+<label>
+    <input type="radio" name="employment" value="internship">
+    Internship
+</label>
+
+All options share the same name, so only one can be selected within the group.
+
+2.7 Checkboxes
+
+Checkboxes allow users to select zero, one, or multiple options.
+
+<p>Skills:</p>
+
+<label>
+    <input type="checkbox" name="skills" value="html">
+    HTML
+</label>
+
+<label>
+    <input type="checkbox" name="skills" value="css">
+    CSS
+</label>
+
+<label>
+    <input type="checkbox" name="skills" value="javascript">
+    JavaScript
+</label>
+
+Use radio buttons for a single choice and checkboxes for independent choices.
+
+2.8 Dropdown — <select>
+
+Use a dropdown when users need to choose from a list of options.
+
+<label for="role">Job Role:</label>
+
+<select id="role" name="role" required>
+    <option value="">Select a role</option>
+    <option value="frontend">Frontend Developer</option>
+    <option value="backend">Backend Developer</option>
+    <option value="fullstack">Full Stack Developer</option>
+</select>
+
+<select> creates the dropdown.
+
+<option> defines each choice.
+
+value specifies the value submitted for the selected option.
+
+2.9 Textarea
+
+Use <textarea> to collect longer text such as messages, descriptions, or cover letters.
+
+<label for="message">Cover Letter:</label>
+
+<textarea
+    id="message"
+    name="message"
+    rows="5"
+    cols="40"
+    placeholder="Tell us about yourself"
+></textarea>
+
+Unlike <input>, <textarea> has opening and closing tags and supports multi-line text.
+
+2.10 Date Input
+
+Use type="date" to collect a date.
+
+<label for="joining-date">Available From:</label>
+
+<input
+    type="date"
+    id="joining-date"
+    name="joining-date"
+>
+
+Browsers generally display a date picker when supported.
+
+2.11 File Upload
+
+Use type="file" to allow a user to select a file.
+
+<label for="resume">Upload Resume:</label>
+
+<input
+    type="file"
+    id="resume"
+    name="resume"
+    accept=".pdf,.doc,.docx"
+>
+
+For a conventional file upload handled by a server, the form generally needs:
+
+<form action="/upload-resume"
+      method="post"
+      enctype="multipart/form-data">
+    <!-- File input and other fields 
+</form>
+
+accept guides the file picker but is not a security check. The server must validate uploaded files.
+
+2.12 Submit and Reset Buttons
+<button type="submit">Submit Application</button>
+<button type="reset">Clear Form</button>
+
+submit — submits the form.
+
+reset — resets controls to their initial values.
+
+Prefer descriptive button text so users know what will happen.
+
+3. Form Validation
+
+HTML provides built-in validation attributes that help users submit valid data.
+
+Attribute
+
+	
+
+Practical use
+
+
+
+
+required
+
+	
+
+Field must be filled in
+
+
+
+
+minlength
+
+	
+
+Minimum number of characters
+
+
+
+
+maxlength
+
+	
+
+Maximum number of characters
+
+
+
+
+min
+
+	
+
+Minimum numeric/date value
+
+
+
+
+max
+
+	
+
+Maximum numeric/date value
+
+
+
+
+pattern
+
+	
+
+Matches a specified regular expression
+
+
+
+
+type="email"
+
+	
+
+Checks email-like format
+
+
+
+
+type="url"
+
+	
+
+Checks URL-like format
+
+Example:
+
+<form action="/contact" method="post">
+    <label for="name">Name:</label>
+    <input
+        type="text"
+        id="name"
+        name="name"
+        minlength="2"
+        maxlength="50"
+        required
+    >
+
+    <label for="email">Email:</label>
+    <input
+        type="email"
+        id="email"
+        name="email"
+        required
+    >
+
+    <button type="submit">Send</button>
+</form>
+
+Real-world rule: Browser validation improves the user experience,
+ but it can be bypassed. A backend must validate incoming data independently.
+-->
